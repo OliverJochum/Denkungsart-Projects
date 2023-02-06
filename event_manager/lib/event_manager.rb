@@ -1,5 +1,7 @@
 require 'csv'
 require 'time'
+require 'date'
+
 puts 'EventManager initialized.'
 
 contents = CSV.open(
@@ -9,6 +11,7 @@ contents = CSV.open(
 )
  
 times = Hash.new
+weekdays = {sunday:0,monday:0,tuesday:0,wednesday:0,thursday:0,friday:0,saturday:0}
 # Assignment 1 phone numbers
 contents.each do |row|
   name = row[:first_name]
@@ -41,7 +44,34 @@ contents.each do |row|
   else
     times[hour] = 1
   end
+
+  # Assignment 3 What day of the week?
+  
+
+  day = Date.strptime(regdate,"%m/%d/%Y %k:%M").wday
+
+  case day
+  when 0
+    weekdays[:sunday] += 1
+  when 1
+    weekdays[:monday] += 1
+  when 2
+    weekdays[:tuesday] += 1
+  when 3
+    weekdays[:wednesday] += 1
+  when 4
+    weekdays[:thursday] += 1
+  when 5
+    weekdays[:friday] += 1
+  when 6
+    weekdays[:saturday] += 1
+  end
+
 end
 
-puts times.key(times.values.max)
-puts times.values.max
+
+puts "Hour: #{times.key(times.values.max)}"
+puts "Frequency: #{times.values.max}"
+
+puts "Day: #{weekdays.key(weekdays.values.max)}"
+puts "Frequency: #{weekdays.values.max}"
