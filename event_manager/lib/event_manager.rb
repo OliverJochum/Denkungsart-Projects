@@ -17,6 +17,7 @@ contents.each do |row|
   name = row[:first_name]
   phone = row[:homephone]
 
+
   # If the phone number is less than 10 digits, assume that it is a bad number
   if phone.length >= 10 && phone.length <= 11 || !(phone.length == 11 && phone[0] != 1)
     if phone.length == 11 && phone[0] == 1
